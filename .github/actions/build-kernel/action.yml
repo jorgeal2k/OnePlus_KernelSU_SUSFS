@@ -981,6 +981,8 @@ runs:
         cp "$SUSFS_FOLDER/kernel_patches/fs/"* "$COMMON_KERNEL_FOLDER/fs/"
         cp "$SUSFS_FOLDER/kernel_patches/include/linux/"* "$COMMON_KERNEL_FOLDER/include/linux/"
         
+        sed -i 's/#define DEFAULT_KSU_MNT_ID 500000/#define DEFAULT_KSU_MNT_ID 5000000/' "$COMMON_KERNEL_FOLDER/include/linux/susfs_def.h"
+        
         susfs_version=$(grep '#define SUSFS_VERSION' "$COMMON_KERNEL_FOLDER/include/linux/susfs.h" | awk -F'"' '{print $2}')
         echo "SUSVER=$susfs_version" >> $GITHUB_ENV
         echo "$susfs_version" >> "${ARTIFACTS_FOLDER}/${OP_MODEL}_${OP_OS_VERSION}.txt"
